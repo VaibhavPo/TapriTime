@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapri Time</title>
+    <style>
+        /* General reset and body styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: #fafafa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Main container styling */
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Header area for Tapri Time */
+        .header {
+            background: #ff6347;
+            padding: 20px 0;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Title styling */
+        .menu-title {
+            font-size: 22px;
+            color: #ff6347;
+            margin: 20px 0 10px;
+        }
+
+        /* Menu item styling */
+        .menu-item {
+            margin: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+        }
+
+        .order-number {
+            margin: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .order-number label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .order-number input {
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        .menu-item label {
+            flex: 1;
+            text-align: left;
+        }
+
+        .menu-item input {
+            width: 60px;
+            padding: 5px;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Cart total styling */
+        .cart {
+            font-weight: bold;
+            font-size: 20px;
+            margin: 20px 0;
+            color: #ff6347;
+        }
+
+        /* Pay button styling */
+        .button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+            background: #ff6347;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .button:hover {
+            background: #ff4500;
+        }
+
+        .header {
+            background: #ff6347;
+            padding: 20px 0;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header img {
+            width: 60px;
+            height: 60px;
+            margin-right: 30px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="tapriLogo.png" alt="Tapri Time Logo">
+            Tapri Time
+        </div>
+        <h2 class="menu-title">Our Menu</h2>
+        <h5>All Items @20</h3>
+
+            <div class="menu-item">
+                <label for="alooPatiseQty">Aloo Patise:</label>
+                <input type="number" id="alooPatiseQty" min="0" value="0" onchange="updateCart()">
+            </div>
+
+            <div class="menu-item">
+                <label for="popcornQty">Popcorn:</label>
+                <input type="number" id="popcornQty" min="0" value="0" onchange="updateCart()">
+            </div>
+            <br><br>
+            <div class="order-number">
+                <label for="orderNumber">Order Number:</label>
+                <input type="text" id="orderNumber" placeholder="Enter your order number">
+            </div>
+            <div class="cart" id="cartTotal">Total: ₹0</div>
+
+            <button class="button" onclick="payNow()">Pay Now</button>
+    </div>
+
+    <script>
+        function updateCart() {
+            let alooPatiseQty = document.getElementById('alooPatiseQty').value;
+            let popcornQty = document.getElementById('popcornQty').value;
+            let orderNumber = document.getElementById('orderNumber').value;
+
+            if (orderNumber.trim() === "") {
+                alert("Please enter an order number.");
+                return;
+            }
+
+            let total = (alooPatiseQty * 20) + (popcornQty * 20);
+            document.getElementById('cartTotal').innerText = 'Total: ₹' + total;
+        }
+
+        function payNow() {
+            let total = document.getElementById('cartTotal').innerText.split('₹')[1];
+            let upiLink = `upi://pay?pa=9528187139@pthdfc&pn=Vaibhav%20Pokhriyal&am=${total}&cu=INR&tn=Order%20${orderNumber}`;
+            window.location.href = upiLink;
+        }
+    </script>
+</body>
+
+</html>
