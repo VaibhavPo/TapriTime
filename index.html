@@ -186,7 +186,7 @@
 
         function payNow() {
             let total = document.getElementById('cartTotal').innerText.split('₹')[1];
-            let upiLink = `upi://pay?pa=9528187139@pthdfc&pn=Vaibhav%20Pokhriyal&am=${total}&cu=INR&tn=Order%20${orderNumber}`;
+            let upiLink = `upi://pay?pa=9528187139@pthdfc&pn=Vaibhav%20Pokhriyal&am=${total}&cu=INR`;
             window.location.href = upiLink;
         }
     </script>
